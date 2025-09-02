@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Xbox Games - Coleção Moderna de Jogos",
-  description: "Explore nossa incrível coleção de jogos Xbox com design moderno e elegante",
+  title: "Xbox Games - Portfolio Profissional",
+  description: "Plataforma moderna para exploração de jogos Xbox com design profissional",
 };
 
 export default function RootLayout({ children }) {
@@ -23,28 +23,28 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <nav className="vidro sticky top-0 z-50 border-b border-white/10">
+        <nav className="vidro-profissional sticky top-0 z-50 border-b border-white/10">
           <div className="max-w-7xl mx-auto px-6 py-4">
             <div className="flex justify-between items-center">
               <div className="flex items-center space-x-8">
-                <h1 className="text-2xl font-bold text-white flex items-center gap-2">
-                  🎮 <span className="texto-gradiente">Xbox Games</span>
+                <h1 className="text-xl font-semibold text-white flex items-center gap-2">
+                  <span className="text-blue-400">🎮</span> Xbox Games
                 </h1>
-                <div className="hidden md:flex space-x-6">
-                  <Link href="/" className="text-white/80 hover:text-white transition-all duration-200 font-medium px-4 py-2 rounded-full hover:bg-white/10">
-                    🏠 Início
+                <div className="hidden md:flex space-x-1">
+                  <Link href="/" className="text-slate-300 hover:text-white transition-colors duration-200 font-medium px-4 py-2 rounded-lg hover:bg-white/10">
+                    Início
                   </Link>
-                  <Link href="/apiinfo" className="text-white/80 hover:text-white transition-all duration-200 font-medium px-4 py-2 rounded-full hover:bg-white/10">
-                    📚 Sobre a API
+                  <Link href="/apiinfo" className="text-slate-300 hover:text-white transition-colors duration-200 font-medium px-4 py-2 rounded-lg hover:bg-white/10">
+                    API
                   </Link>
-                  <Link href="/games" className="text-white/80 hover:text-white transition-all duration-200 font-medium px-4 py-2 rounded-full hover:bg-white/10">
-                    🎮 Jogos
+                  <Link href="/games" className="text-slate-300 hover:text-white transition-colors duration-200 font-medium px-4 py-2 rounded-lg hover:bg-white/10">
+                    Jogos
                   </Link>
                 </div>
               </div>
               <div className="hidden md:block">
-                <span className="text-white/60 text-sm bg-white/10 px-3 py-1 rounded-full">
-                  💫 Powered by Sample APIs
+                <span className="text-slate-400 text-sm bg-white/5 px-3 py-1 rounded-full border border-white/10">
+                  Sample APIs
                 </span>
               </div>
             </div>

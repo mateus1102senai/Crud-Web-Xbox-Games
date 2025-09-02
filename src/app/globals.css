@@ -4,8 +4,11 @@
 @tailwind utilities;
 
 :root {
-  --background: #0f0f23;
+  --background: #0a0a0a;
   --foreground: #ffffff;
+  --accent: #3b82f6;
+  --secondary: #1e293b;
+  --muted: #64748b;
 }
 
 * {
@@ -13,7 +16,7 @@
 }
 
 body {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
   min-height: 100vh;
   color: var(--foreground);
   font-family: 'Inter', sans-serif;
@@ -21,33 +24,33 @@ body {
   padding: 0;
 }
 
-/* Classes customizadas */
-.vidro {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+/* Classes profissionais */
+.vidro-profissional {
+  background: rgba(30, 41, 59, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.card-flutuante {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+.card-elegante {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.card-flutuante:hover {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+.card-elegante:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
 }
 
-.texto-gradiente {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+.texto-gradiente-sutil {
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
 }
 
-.botao-moderno {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+.botao-profissional {
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
@@ -55,20 +58,52 @@ body {
   cursor: pointer;
 }
 
-.botao-moderno:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 15px 30px rgba(102, 126, 234, 0.4);
+.botao-profissional:hover {
+  background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
 }
 
-.animacao-float {
-  animation: flutuar 4s ease-in-out infinite;
+.botao-secundario {
+  background: rgba(30, 41, 59, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
 }
 
-@keyframes flutuar {
+.botao-secundario:hover {
+  background: rgba(30, 41, 59, 0.9);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-1px);
+}
+
+.animacao-sutil {
+  animation: flutuarSutil 6s ease-in-out infinite;
+}
+
+@keyframes flutuarSutil {
   0%, 100% { 
     transform: translateY(0px); 
   }
   50% { 
-    transform: translateY(-15px); 
+    transform: translateY(-8px); 
   }
+}
+
+.badge-categoria {
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  color: #93c5fd;
+}
+
+.badge-dev {
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  color: #6ee7b7;
+}
+
+.badge-publisher {
+  background: rgba(245, 158, 11, 0.1);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  color: #fcd34d;
 }
