@@ -13,36 +13,46 @@ body {
   font-family: 'Inter', sans-serif;
 }
 
-/* Efeitos de vidro e animações */
-.glass-effect {
+/* Efeitos visuais modernos */
+.vidro {
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(15px);
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.card-hover {
+.card-flutuante {
   transition: all 0.3s ease;
 }
 
-.card-hover:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+.card-flutuante:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
 }
 
-.gradient-text {
+.texto-gradiente {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.btn-moderno {
+.botao-moderno {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
 }
 
-.btn-moderno:hover {
+.botao-moderno:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 15px 30px rgba(102, 126, 234, 0.4);
+}
+
+.animacao-float {
+  animation: flutuar 4s ease-in-out infinite;
+}
+
+@keyframes flutuar {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
 }
