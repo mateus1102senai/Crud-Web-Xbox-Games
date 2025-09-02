@@ -1,0 +1,5 @@
+- [x] Projeto Next.js 15 inicializado com App Router, Tailwind CSS, alias @/*, src/directory, usando JavaScript e npm.
+- [ ] Estruturar páginas e componentes conforme requisitos.
+- [ ] Instalar axios e Toastify.
+- [ ] Implementar consumo da API e CRUD.
+- [ ] Finalizar README.md e documentação.

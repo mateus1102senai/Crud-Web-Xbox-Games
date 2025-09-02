@@ -1,0 +1,3 @@
+// Estrutura inicial do projeto Next.js 15 CRUD com API pública
+// Diretórios e arquivos principais já criados pelo create-next-app
+// Próximo passo: instalar axios e react-toastify
