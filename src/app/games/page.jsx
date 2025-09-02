@@ -46,101 +46,145 @@ export default async function GamesPage() {
           </div>
         </div>
 
-        {/* Grid profissional */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {games.slice(0, 12).map((game) => (
+        {/* Grid de cards elegantes */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {games.slice(0, 12).map((game, index) => (
             <div 
               key={game.id} 
-              className="card-elegante group hover:translate-y-[-8px] transition-all duration-500"
+              className="group relative card-animacao"
+              style={{ 
+                animationDelay: `${index * 150}ms`,
+              }}
             >
-              {/* Cabeçalho do card */}
-              <div className="p-6 pb-4">
-                <div className="flex items-start justify-between mb-3">
-                  <h3 className="text-xl font-semibold text-white line-clamp-2 flex-1 mr-3">
-                    {game.name}
-                  </h3>
-                  <div className="bg-slate-800/50 border border-white/10 rounded px-2 py-1 text-xs text-slate-300 font-mono">
-                    #{game.id}
+              {/* Card principal com efeitos elegantes */}
+              <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-slate-800/60 via-slate-900/80 to-slate-800/60 backdrop-blur-xl border border-white/10 hover:border-white/20 transition-all duration-700 group-hover:scale-[1.02] group-hover:shadow-2xl group-hover:shadow-blue-500/10">
+                
+                {/* Efeito de luz superior */}
+                <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
+                
+                {/* Badge ID elegante */}
+                <div className="absolute top-4 right-4 z-10">
+                  <div className="bg-gradient-to-r from-blue-500/20 to-purple-500/20 backdrop-blur-sm border border-white/20 rounded-full px-3 py-1">
+                    <span className="text-xs font-mono text-white/80">#{game.id}</span>
                   </div>
                 </div>
-                
-                {/* Metadados organizados */}
-                <div className="space-y-3">
-                  {/* Gêneros */}
-                  {game.genre && game.genre.length > 0 && (
-                    <div className="space-y-2">
-                      <span className="text-slate-400 font-medium text-sm">Gêneros:</span>
-                      <div className="flex flex-wrap gap-1">
-                        {game.genre.slice(0, 3).map((genero, index) => (
-                          <span 
-                            key={index}
-                            className="px-2 py-1 bg-blue-500/20 border border-blue-400/30 rounded text-blue-200 text-xs font-medium"
-                          >
-                            {genero}
-                          </span>
-                        ))}
-                        {game.genre.length > 3 && (
-                          <span className="px-2 py-1 bg-slate-500/20 border border-slate-400/30 rounded text-slate-300 text-xs">
-                            +{game.genre.length - 3}
-                          </span>
-                        )}
+
+                {/* Conteúdo do card */}
+                <div className="p-6 relative z-10">
+                  {/* Título com efeito gradiente */}
+                  <h3 className="text-xl font-bold text-white mb-4 leading-tight group-hover:bg-gradient-to-r group-hover:from-blue-200 group-hover:to-purple-200 group-hover:bg-clip-text group-hover:text-transparent transition-all duration-500">
+                    {game.name}
+                  </h3>
+
+                  {/* Container de informações com glass effect */}
+                  <div className="space-y-4">
+                    
+                    {/* Gêneros com badges elegantes */}
+                    {game.genre && game.genre.length > 0 && (
+                      <div className="space-y-2">
+                        <span className="text-slate-300 font-medium text-sm flex items-center gap-2">
+                          <span className="w-2 h-2 bg-blue-400 rounded-full"></span>
+                          Gêneros
+                        </span>
+                        <div className="flex flex-wrap gap-1.5">
+                          {game.genre.slice(0, 3).map((genero, index) => (
+                            <span 
+                              key={index}
+                              className="px-2.5 py-1 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 border border-blue-400/30 rounded-full text-blue-200 text-xs font-medium backdrop-blur-sm hover:from-blue-500/30 hover:to-cyan-500/30 transition-all duration-300 badge-hover cursor-pointer"
+                            >
+                              {genero}
+                            </span>
+                          ))}
+                          {game.genre.length > 3 && (
+                            <span className="px-2.5 py-1 bg-gradient-to-r from-slate-500/20 to-gray-500/20 border border-slate-400/30 rounded-full text-slate-300 text-xs backdrop-blur-sm badge-hover cursor-pointer">
+                              +{game.genre.length - 3}
+                            </span>
+                          )}
+                        </div>
                       </div>
-                    </div>
-                  )}
+                    )}
 
-                  {/* Desenvolvedores */}
-                  {game.developers && game.developers.length > 0 && (
-                    <div className="flex items-center gap-2 text-sm">
-                      <span className="text-slate-400 font-medium">Desenvolvedores:</span>
-                      <span className="text-white bg-slate-800/40 px-2 py-1 rounded border border-white/10 text-xs truncate">
-                        {game.developers[0]}
-                        {game.developers.length > 1 && ` (+${game.developers.length - 1})`}
-                      </span>
-                    </div>
-                  )}
-
-                  {/* Publicadoras */}
-                  {game.publishers && game.publishers.length > 0 && (
-                    <div className="flex items-center gap-2 text-sm">
-                      <span className="text-slate-400 font-medium">Publicadoras:</span>
-                      <span className="text-white bg-slate-800/40 px-2 py-1 rounded border border-white/10 text-xs truncate">
-                        {game.publishers[0]}
-                        {game.publishers.length > 1 && ` (+${game.publishers.length - 1})`}
-                      </span>
-                    </div>
-                  )}
-
-                  {/* Datas de lançamento */}
-                  {game.releaseDates && (
-                    <div className="space-y-2">
-                      <span className="text-slate-400 font-medium text-sm">Lançamento:</span>
-                      <div className="grid grid-cols-2 gap-2">
-                        {game.releaseDates.NorthAmerica && (
-                          <div className="bg-slate-800/30 border border-white/5 rounded p-2">
-                            <div className="text-slate-400 text-xs">América do Norte</div>
-                            <div className="text-white text-xs font-medium">{game.releaseDates.NorthAmerica}</div>
-                          </div>
-                        )}
-                        {game.releaseDates.Europe && (
-                          <div className="bg-slate-800/30 border border-white/5 rounded p-2">
-                            <div className="text-slate-400 text-xs">Europa</div>
-                            <div className="text-white text-xs font-medium">{game.releaseDates.Europe}</div>
-                          </div>
-                        )}
+                    {/* Desenvolvedores com estilo minimalista */}
+                    {game.developers && game.developers.length > 0 && (
+                      <div className="bg-slate-800/30 border border-white/5 rounded-xl p-3 backdrop-blur-sm">
+                        <div className="flex items-center gap-2 mb-2">
+                          <span className="w-2 h-2 bg-green-400 rounded-full"></span>
+                          <span className="text-slate-300 font-medium text-sm">Desenvolvedores</span>
+                        </div>
+                        <div className="text-white font-medium text-sm">
+                          {game.developers[0]}
+                          {game.developers.length > 1 && (
+                            <span className="text-slate-400 ml-1">
+                              +{game.developers.length - 1} outros
+                            </span>
+                          )}
+                        </div>
                       </div>
-                    </div>
-                  )}
+                    )}
+
+                    {/* Publicadoras */}
+                    {game.publishers && game.publishers.length > 0 && (
+                      <div className="bg-slate-800/30 border border-white/5 rounded-xl p-3 backdrop-blur-sm">
+                        <div className="flex items-center gap-2 mb-2">
+                          <span className="w-2 h-2 bg-purple-400 rounded-full"></span>
+                          <span className="text-slate-300 font-medium text-sm">Publicadoras</span>
+                        </div>
+                        <div className="text-white font-medium text-sm">
+                          {game.publishers[0]}
+                          {game.publishers.length > 1 && (
+                            <span className="text-slate-400 ml-1">
+                              +{game.publishers.length - 1} outras
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Datas de lançamento compactas */}
+                    {game.releaseDates && (
+                      <div className="bg-gradient-to-r from-slate-800/40 to-slate-700/40 border border-white/10 rounded-xl p-4 backdrop-blur-sm">
+                        <div className="flex items-center gap-2 mb-3">
+                          <span className="w-2 h-2 bg-yellow-400 rounded-full"></span>
+                          <span className="text-slate-300 font-medium text-sm">Lançamentos</span>
+                        </div>
+                        <div className="grid grid-cols-2 gap-2 text-xs">
+                          {game.releaseDates.NorthAmerica && (
+                            <div className="bg-blue-500/10 border border-blue-400/20 rounded-lg p-2 text-center">
+                              <div className="text-blue-300 font-medium">América</div>
+                              <div className="text-white font-mono text-[10px] mt-1">{game.releaseDates.NorthAmerica}</div>
+                            </div>
+                          )}
+                          {game.releaseDates.Europe && (
+                            <div className="bg-green-500/10 border border-green-400/20 rounded-lg p-2 text-center">
+                              <div className="text-green-300 font-medium">Europa</div>
+                              <div className="text-white font-mono text-[10px] mt-1">{game.releaseDates.Europe}</div>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    )}
+                  </div>
                 </div>
-              </div>
 
-              {/* Rodapé do card */}
-              <div className="p-6 pt-4 border-t border-white/10 mt-auto">
-                <Link 
-                  href={`/games/${game.id}`}
-                  className="botao-profissional w-full text-center py-2.5 text-white rounded-lg font-medium inline-block"
-                >
-                  Ver Detalhes
-                </Link>
+                {/* Rodapé com botão elegante */}
+                <div className="p-6 pt-4 border-t border-white/10 bg-gradient-to-r from-slate-900/50 to-slate-800/50">
+                  <Link 
+                    href={`/games/${game.id}`}
+                    className="block w-full"
+                  >
+                    <button className="w-full bg-gradient-to-r from-blue-500/20 to-purple-500/20 hover:from-blue-500/30 hover:to-purple-500/30 border border-blue-400/30 hover:border-blue-400/50 text-white py-3 rounded-xl font-medium text-sm transition-all duration-300 backdrop-blur-sm group-hover:scale-[1.02] hover:shadow-lg hover:shadow-blue-500/20">
+                      <span className="flex items-center justify-center gap-2">
+                        Ver Detalhes
+                        <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                        </svg>
+                      </span>
+                    </button>
+                  </Link>
+                </div>
+
+                {/* Efeito de brilho no hover */}
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-500/0 via-blue-500/5 to-purple-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl"></div>
               </div>
             </div>
           ))}
