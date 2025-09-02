@@ -1,5 +1,17 @@
 import axios from 'axios';
 import Link from 'next/link';
+import { Card, Tag, Button, Divider, Row, Col, Typography, Space, Avatar } from 'antd';
+import { 
+  PlayCircleOutlined, 
+  CalendarOutlined, 
+  TeamOutlined, 
+  GlobalOutlined,
+  ArrowRightOutlined,
+  TrophyOutlined,
+  StarOutlined
+} from '@ant-design/icons';
+
+const { Title, Text, Paragraph } = Typography;
 
 async function getGames() {
   try {
@@ -18,17 +30,262 @@ export default async function GamesPage() {
   if (!games || games.length === 0) {
     return (
       <main className="min-h-screen flex items-center justify-center p-8">
-        <div className="vidro-profissional rounded-xl p-12 text-center max-w-md">
-          <div className="text-4xl mb-4 text-slate-400">⚠️</div>
-          <h1 className="text-2xl font-semibold text-white mb-4">Erro ao carregar jogos</h1>
-          <p className="text-slate-400 mb-6">Verifique se a API está funcionando corretamente</p>
-          <Link href="/" className="botao-profissional px-6 py-3 text-white rounded-lg font-medium inline-block">
-            Voltar ao Início
-          </Link>
-        </div>
+        <Card
+          className="max-w-md mx-auto text-center"
+          style={{
+            background: 'rgba(30, 41, 59, 0.8)',
+            backdropFilter: 'blur(20px)',
+            border: '1px solid rgba(255, 255, 255, 0.1)',
+          }}
+        >
+          <div className="p-8">
+            <Avatar size={64} className="bg-red-500 mb-4" icon={<PlayCircleOutlined />} />
+            <Title level={3} className="!text-white !mb-4">
+              Erro ao carregar jogos
+            </Title>
+            <Paragraph className="!text-slate-400 !mb-6">
+              Verifique se a API está funcionando corretamente
+            </Paragraph>
+            <Link href="/">
+              <Button type="primary" size="large">
+                Voltar ao Início
+              </Button>
+            </Link>
+          </div>
+        </Card>
       </main>
     );
   }
+
+  return (
+    <main className="min-h-screen p-4 md:p-8">
+      <div className="max-w-7xl mx-auto">
+        {/* Cabeçalho estilo Ant Design */}
+        <div className="text-center mb-12">
+          <div className="mb-6">
+            <Avatar size={64} icon={<TrophyOutlined />} className="bg-blue-500 mb-4" />
+            <Title level={1} className="!text-white !mb-2">
+              Coleção Xbox Games
+            </Title>
+            <Paragraph className="!text-slate-400 !text-lg !mb-6 max-w-2xl mx-auto">
+              Explore nossa biblioteca com {games.length} títulos cuidadosamente catalogados
+            </Paragraph>
+            <Tag color="blue" className="px-4 py-1 text-sm">
+              <StarOutlined className="mr-1" />
+              {games.length} jogos disponíveis
+            </Tag>
+          </div>
+        </div>
+
+        {/* Grid de Cards estilo Ant Design */}
+        <Row gutter={[24, 24]} className="mb-12">
+          {games.slice(0, 16).map((game, index) => (
+            <Col xs={24} sm={12} lg={8} xl={6} key={game.id}>
+              <Card
+                className="antd-game-card h-full"
+                hoverable
+                style={{
+                  borderRadius: '12px',
+                  overflow: 'hidden',
+                  background: 'rgba(30, 41, 59, 0.8)',
+                  backdropFilter: 'blur(20px)',
+                  border: '1px solid rgba(255, 255, 255, 0.1)',
+                  animationDelay: `${index * 100}ms`,
+                }}
+                bodyStyle={{ 
+                  padding: '20px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  height: '100%'
+                }}
+                actions={[
+                  <Link href={`/games/${game.id}`} key="details">
+                    <Button 
+                      type="primary" 
+                      icon={<ArrowRightOutlined />}
+                      className="w-full"
+                      size="large"
+                    >
+                      Ver Detalhes
+                    </Button>
+                  </Link>
+                ]}
+              >
+                {/* Cabeçalho do Card */}
+                <div className="flex justify-between items-start mb-4">
+                  <div className="flex-1">
+                    <Title level={4} className="!text-white !mb-2 !leading-tight">
+                      {game.name}
+                    </Title>
+                  </div>
+                  <Tag color="processing" className="!ml-2">
+                    #{game.id}
+                  </Tag>
+                </div>
+
+                {/* Gêneros */}
+                {game.genre && game.genre.length > 0 && (
+                  <div className="mb-4">
+                    <Text className="!text-slate-400 !text-sm !block !mb-2">
+                      <PlayCircleOutlined className="mr-1" />
+                      Gêneros
+                    </Text>
+                    <Space size={[4, 4]} wrap>
+                      {game.genre.slice(0, 3).map((genero, index) => (
+                        <Tag key={index} color="blue" className="!m-0">
+                          {genero}
+                        </Tag>
+                      ))}
+                      {game.genre.length > 3 && (
+                        <Tag color="default">+{game.genre.length - 3}</Tag>
+                      )}
+                    </Space>
+                  </div>
+                )}
+
+                {/* Desenvolvedores */}
+                {game.developers && game.developers.length > 0 && (
+                  <div className="mb-4">
+                    <Text className="!text-slate-400 !text-sm !block !mb-2">
+                      <TeamOutlined className="mr-1" />
+                      Desenvolvedores
+                    </Text>
+                    <div className="bg-slate-700/30 rounded-lg p-3 border border-white/10">
+                      <Text className="!text-white !font-medium">
+                        {game.developers[0]}
+                      </Text>
+                      {game.developers.length > 1 && (
+                        <Text className="!text-slate-400 !text-xs !block !mt-1">
+                          +{game.developers.length - 1} outros
+                        </Text>
+                      )}
+                    </div>
+                  </div>
+                )}
+
+                {/* Publicadoras */}
+                {game.publishers && game.publishers.length > 0 && (
+                  <div className="mb-4">
+                    <Text className="!text-slate-400 !text-sm !block !mb-2">
+                      <GlobalOutlined className="mr-1" />
+                      Publicadoras
+                    </Text>
+                    <div className="bg-slate-700/30 rounded-lg p-3 border border-white/10">
+                      <Text className="!text-white !font-medium">
+                        {game.publishers[0]}
+                      </Text>
+                      {game.publishers.length > 1 && (
+                        <Text className="!text-slate-400 !text-xs !block !mt-1">
+                          +{game.publishers.length - 1} outras
+                        </Text>
+                      )}
+                    </div>
+                  </div>
+                )}
+
+                {/* Datas de Lançamento */}
+                {game.releaseDates && (
+                  <div className="mt-auto">
+                    <Text className="!text-slate-400 !text-sm !block !mb-2">
+                      <CalendarOutlined className="mr-1" />
+                      Lançamentos
+                    </Text>
+                    <Row gutter={8}>
+                      {game.releaseDates.NorthAmerica && (
+                        <Col span={12}>
+                          <div className="bg-blue-500/10 border border-blue-400/30 rounded-md p-2 text-center">
+                            <Text className="!text-blue-400 !text-xs !block">América</Text>
+                            <Text className="!text-white !text-xs !font-mono">
+                              {game.releaseDates.NorthAmerica}
+                            </Text>
+                          </div>
+                        </Col>
+                      )}
+                      {game.releaseDates.Europe && (
+                        <Col span={12}>
+                          <div className="bg-green-500/10 border border-green-400/30 rounded-md p-2 text-center">
+                            <Text className="!text-green-400 !text-xs !block">Europa</Text>
+                            <Text className="!text-white !text-xs !font-mono">
+                              {game.releaseDates.Europe}
+                            </Text>
+                          </div>
+                        </Col>
+                      )}
+                    </Row>
+                  </div>
+                )}
+              </Card>
+            </Col>
+          ))}
+        </Row>
+
+        {/* Estatísticas estilo Ant Design */}
+        <Card 
+          className="antd-stats-card"
+          style={{
+            background: 'rgba(30, 41, 59, 0.8)',
+            backdropFilter: 'blur(20px)',
+            border: '1px solid rgba(255, 255, 255, 0.1)',
+            borderRadius: '12px'
+          }}
+          bodyStyle={{ padding: '32px' }}
+        >
+          <div className="text-center mb-6">
+            <Title level={2} className="!text-white !mb-2">
+              Estatísticas da Coleção
+            </Title>
+          </div>
+          
+          <Row gutter={[32, 32]} className="text-center">
+            <Col xs={24} md={8}>
+              <Card
+                className="stat-card bg-gradient-to-br from-blue-500/20 to-cyan-500/20 border-blue-400/30"
+                style={{ background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(6, 182, 212, 0.2))', border: '1px solid rgba(59, 130, 246, 0.3)' }}
+              >
+                <Title level={1} className="!text-blue-400 !mb-2">
+                  {games.length}
+                </Title>
+                <Text className="!text-slate-400 !font-medium">Total de Jogos</Text>
+              </Card>
+            </Col>
+            
+            <Col xs={24} md={8}>
+              <Card
+                className="stat-card"
+                style={{ background: 'linear-gradient(135deg, rgba(34, 197, 94, 0.2), rgba(16, 185, 129, 0.2))', border: '1px solid rgba(34, 197, 94, 0.3)' }}
+              >
+                <Title level={1} className="!text-green-400 !mb-2">
+                  {new Set(games.flatMap(game => game.genre || [])).size}
+                </Title>
+                <Text className="!text-slate-400 !font-medium">Gêneros Únicos</Text>
+              </Card>
+            </Col>
+            
+            <Col xs={24} md={8}>
+              <Card
+                className="stat-card"
+                style={{ background: 'linear-gradient(135deg, rgba(147, 51, 234, 0.2), rgba(168, 85, 247, 0.2))', border: '1px solid rgba(147, 51, 234, 0.3)' }}
+              >
+                <Title level={1} className="!text-purple-400 !mb-2">
+                  {new Set(games.flatMap(game => game.developers || [])).size}
+                </Title>
+                <Text className="!text-slate-400 !font-medium">Desenvolvedoras</Text>
+              </Card>
+            </Col>
+          </Row>
+
+          <Divider className="!border-white/20 !my-8" />
+          
+          <div className="text-center">
+            <Tag color="processing" className="px-4 py-1">
+              Exibindo {Math.min(16, games.length)} de {games.length} jogos
+            </Tag>
+          </div>
+        </Card>
+      </div>
+    </main>
+  );
+}
 
   return (
     <main className="min-h-screen p-8">
