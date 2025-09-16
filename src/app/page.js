@@ -13,11 +13,11 @@ export default function Home() {
           <h3 className="text-lg font-medium mb-4 text-gray-400">Aluno: Mateus Marcelino</h3>
           <div className="mb-4">
             <Image
-              src="/window.svg"
-              alt="Avatar do Aluno"
+              src="/avatar.jpg"
+              alt="Avatar do Aluno - Mateus Marcelino"
               width={120}
               height={120}
-              className="rounded-full border-4 border-green-500 shadow-lg"
+              className="rounded-full border-4 border-green-500 shadow-lg object-cover"
             />
           </div>
           <blockquote className="italic text-center text-green-300 mt-2">
