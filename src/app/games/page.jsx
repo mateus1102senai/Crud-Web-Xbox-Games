@@ -65,12 +65,14 @@ export default function GamesList() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen bg-gray-50 p-6 flex flex-col items-center">
+      <main className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black p-6 flex flex-col items-center">
         <div className="w-full max-w-6xl mb-6">
           <div className="flex justify-between items-center mb-6">
-            <h1 className="text-3xl font-bold text-gray-800">Jogos Xbox</h1>
-            <Link href="/games/create" className="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-lg transition-colors font-semibold">
-              + Novo Jogo
+            <h1 className="text-4xl font-bold text-green-400 flex items-center gap-3">
+              🎮 <span>Jogos Xbox</span>
+            </h1>
+            <Link href="/games/create" className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg transition-colors font-semibold border border-green-500 shadow-lg">
+              ➕ Novo Jogo
             </Link>
           </div>
           
@@ -86,36 +88,36 @@ export default function GamesList() {
               onChange={handlePageChange}
               onShowSizeChange={handlePageSizeChange}
               showQuickJumper={true}
-              className="bg-white p-4 rounded-lg shadow-sm"
+              className="bg-gray-800 border border-green-500 p-4 rounded-lg shadow-lg text-white"
             />
           </div>
         </div>
         
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full max-w-6xl mb-8">
           {currentGames.map((game) => (
-            <div key={game.id} className="bg-white rounded-lg shadow-md p-4 flex flex-col hover:shadow-lg transition-shadow">
-              <div className="flex-1 mb-3">
-                <h2 className="font-semibold text-lg mb-2 text-center leading-tight">{game.name}</h2>
-                <div className="text-center mb-2">
+            <div key={game.id} className="bg-gray-800 border border-green-500 rounded-lg shadow-xl p-5 flex flex-col hover:shadow-2xl hover:border-green-400 transition-all duration-300">
+              <div className="flex-1 mb-4">
+                <h2 className="font-bold text-xl mb-3 text-center leading-tight text-green-300">{game.name}</h2>
+                <div className="text-center mb-3">
                   {game.genre && game.genre.length > 0 ? (
-                    <span className="text-blue-600 text-sm font-medium">
+                    <span className="text-green-400 text-sm font-medium bg-gray-700 px-2 py-1 rounded">
                       {game.genre.join(", ")}
                     </span>
                   ) : (
-                    <span className="text-gray-400 text-sm">Gênero não informado</span>
+                    <span className="text-gray-500 text-sm bg-gray-700 px-2 py-1 rounded">Gênero não informado</span>
                   )}
                 </div>
                 <div className="text-center">
                   {game.developers && game.developers.length > 0 ? (
-                    <span className="text-gray-600 text-xs">
-                      Dev: {game.developers.join(", ")}
+                    <span className="text-gray-300 text-xs">
+                      🎯 {game.developers.join(", ")}
                     </span>
                   ) : (
-                    <span className="text-gray-400 text-xs">Desenvolvedor desconhecido</span>
+                    <span className="text-gray-500 text-xs">Desenvolvedor desconhecido</span>
                   )}
                 </div>
               </div>
-              <Link href={`/games/${game.id}`} className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded transition-colors text-center font-medium">Ver Detalhes</Link>
+              <Link href={`/games/${game.id}`} className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition-all duration-300 text-center font-semibold border border-green-500 hover:border-green-400">🎮 Ver Detalhes</Link>
             </div>
           ))}
         </div>
