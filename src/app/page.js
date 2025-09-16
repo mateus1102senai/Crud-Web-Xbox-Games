@@ -13,7 +13,7 @@ export default function Home() {
           <h3 className="text-lg font-medium mb-4 text-gray-400">Aluno: Mateus Marcelino</h3>
           <div className="mb-4">
             <Image
-              src="/avatar.jpg"
+              src="https://avatars.githubusercontent.com/u/158166706?v=4"
               alt="Avatar do Aluno - Mateus Marcelino"
               width={120}
               height={120}
