@@ -1,0 +1,39 @@
+/* Pagination Styles */
+.ant-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.ant-pagination-item {
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+}
+
+.ant-pagination-item-active {
+  background-color: #3b82f6;
+  border-color: #3b82f6;
+}
+
+.ant-pagination-item-active a {
+  color: white;
+}
+
+.ant-pagination-prev,
+.ant-pagination-next {
+  border-radius: 6px;
+}
+
+.ant-pagination-options {
+  margin-left: 16px;
+}
+
+.ant-select:not(.ant-select-customize-input) .ant-select-selector {
+  border-radius: 6px;
+}
+
+.ant-pagination-jump-prev .ant-pagination-item-container .ant-pagination-item-link-icon,
+.ant-pagination-jump-next .ant-pagination-item-container .ant-pagination-item-link-icon {
+  color: #6b7280;
+}
