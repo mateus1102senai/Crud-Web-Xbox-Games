@@ -30,6 +30,31 @@ export default function GamesList() {
     }
   }
 
+  async function deleteGame(gameId, gameName) {
+    if (!confirm(`Tem certeza que deseja deletar o jogo "${gameName}"?`)) {
+      return;
+    }
+
+    try {
+      const res = await fetch(`https://api.sampleapis.com/xbox/games/${gameId}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      });
+
+      if (res.ok) {
+        // Remove o jogo da lista local
+        setGames(games.filter(game => game.id !== gameId));
+        alert(`Jogo "${gameName}" deletado com sucesso!`);
+      } else {
+        throw new Error('Erro ao deletar jogo');
+      }
+    } catch (e) {
+      alert('Erro ao deletar jogo. Tente novamente.');
+    }
+  }
+
   const handlePageChange = (page, size) => {
     setCurrentPage(page);
     setPageSize(size);
@@ -117,7 +142,15 @@ export default function GamesList() {
                   )}
                 </div>
               </div>
-              <Link href={`/games/${game.id}`} className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition-all duration-300 text-center font-semibold border border-green-500 hover:border-green-400">🎮 Ver Detalhes</Link>
+              <div className="flex flex-col gap-2">
+                <Link href={`/games/${game.id}`} className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition-all duration-300 text-center font-semibold border border-green-500 hover:border-green-400">🎮 Ver Detalhes</Link>
+                <button 
+                  onClick={() => deleteGame(game.id, game.name)}
+                  className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg transition-all duration-300 text-center font-semibold border border-red-500 hover:border-red-400"
+                >
+                  🗑️ Deletar
+                </button>
+              </div>
             </div>
           ))}
         </div>
